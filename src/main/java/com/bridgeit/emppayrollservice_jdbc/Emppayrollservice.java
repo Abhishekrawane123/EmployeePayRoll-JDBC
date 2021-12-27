@@ -22,12 +22,15 @@ public class Emppayrollservice {
 	            con = DriverManager.getConnection(jdbcURL, userName, password);
 	            System.out.println("Connection is Succesful "+con);
 	            statement=con.createStatement();
-	            ResultSet resultSet=statement.executeQuery("select * from emppayrollservice");
+	            boolean store = statement.execute("update employeepayroll set EmpBasicPay=600000 where Name ='Akash';"); ////updating basic salary of Akash on place Terissa
+	            System.out.println(store);
+	            ResultSet resultSet=statement.executeQuery("select * from employeepayroll");
 	            while(resultSet.next()){                                                            //using while loop printing employee data
-	                String name = resultSet.getString("name");
-	                String date = resultSet.getString("s_date");
+	                String name = resultSet.getString("Name");
+	                String date = resultSet.getString("S_date");
+	                String basicPay=resultSet.getString("EmpBasicPay");
 
-	                System.out.print(name+"   "+date);
+	                System.out.println(name+"   "+date+"  "+basicPay);
 	            }
 	        } catch (Exception e) {
 	            e.printStackTrace();
