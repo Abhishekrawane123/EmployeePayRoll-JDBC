@@ -16,26 +16,28 @@ public class Emppayrollservice {
 		String password = "Abhi123*";
 		
 		 Connection con;
-	        Statement statement;
-	        PreparedStatement preparedStatement;
+	        
 	        try{                                                                                    //try catch method to catch any exception occurs
 	            Class.forName("com.mysql.cj.jdbc.Driver");
 	            System.out.println("Driver Loaded");
 	            con = DriverManager.getConnection(jdbcURL, userName, password);
 	            System.out.println("Connection is Succesful "+con);
-	            statement=con.createStatement();
-	            PreparedStatement ps= con.prepareStatement(password);
-	            boolean store = statement.execute("update employeepayroll set EmpBasicPay=600000 where Name ='Akash';"); ////updating basic salary of Akash on place Terissa
-	            System.out.println(store);
-	            ResultSet resultSet=statement.executeQuery("select * from employeepayroll");
+	            
+	            PreparedStatement stmt =con.prepareStatement("select name,s_date from employeepayroll where S_date between cast('2019-06-19' as date) and date(now());");
+	            ResultSet resultSet=stmt.executeQuery();
+	            
 	            while(resultSet.next()){                                                            //using while loop printing employee data
-	                String name = resultSet.getString("Name");
-	                String date = resultSet.getString("S_date");
-	                String basicPay=resultSet.getString("EmpBasicPay");
+	                String name2 = resultSet.getString("name");
+	                String date = resultSet.getString("s_date");
 
-	                System.out.println(name+"   "+date+"  "+basicPay);
+	                System.out.println(name2+" joining date "+date);
 	            }
-	        } catch (Exception e) {
+	            con.close();
+	            
+	        } 
+	        
+	        catch (Exception e)
+	        {
 	            e.printStackTrace();
 	        }
 	        listDrivers();
