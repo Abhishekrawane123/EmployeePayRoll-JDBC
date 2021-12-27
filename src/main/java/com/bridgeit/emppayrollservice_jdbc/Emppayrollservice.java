@@ -3,6 +3,7 @@ package com.bridgeit.emppayrollservice_jdbc;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,12 +17,14 @@ public class Emppayrollservice {
 		
 		 Connection con;
 	        Statement statement;
+	        PreparedStatement preparedStatement;
 	        try{                                                                                    //try catch method to catch any exception occurs
 	            Class.forName("com.mysql.cj.jdbc.Driver");
 	            System.out.println("Driver Loaded");
 	            con = DriverManager.getConnection(jdbcURL, userName, password);
 	            System.out.println("Connection is Succesful "+con);
 	            statement=con.createStatement();
+	            PreparedStatement ps= con.prepareStatement(password);
 	            boolean store = statement.execute("update employeepayroll set EmpBasicPay=600000 where Name ='Akash';"); ////updating basic salary of Akash on place Terissa
 	            System.out.println(store);
 	            ResultSet resultSet=statement.executeQuery("select * from employeepayroll");
