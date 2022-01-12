@@ -87,7 +87,7 @@ public class EmployeePayRollService {
 		}
 		System.out.println(list);
 	}
-	
+
 	public void retrieveEmployees() {
 
 		System.out.println("enter from date in yyyy-mm-dd");
@@ -113,21 +113,6 @@ public class EmployeePayRollService {
 			preparedStatement.close();
 			connection.close();
 			System.out.println("connection closed.......");
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void retrieveMathOPerations() {
-		System.out.println("enter math operation for basic_pay : ");
-		String mathString = scanner.nextLine();
-		try {
-			preparedStatement=connection.prepareStatement("select "+mathString+" from employee_payroll;");
-			resultSet = preparedStatement.executeQuery();
-			System.out.println(mathString);
-			while (resultSet.next()) {
-				System.out.println(resultSet.getDouble(1));
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
